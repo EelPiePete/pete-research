@@ -8,11 +8,14 @@ st.set_page_config(page_title="Pete's Research Assistant", layout="centered")
 st.title("Pete's Research Assistant")
 
 # Instructions
-st.markdown(\"\"\"
+st.markdown("""
 Enter your query below. This tool uses GPT-4 and follows Pete's explicit rules:
 - No speculation
 - Triple-source verification
 - British English
+- Auction-style formatting only
+""")
+
 - Auction-style formatting only
 \"\"\")
 
