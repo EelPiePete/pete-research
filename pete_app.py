@@ -35,7 +35,7 @@ if st.button("Submit"):
     else:
         openai.api_key = api_key
 
-        system_message = \"\"\"
+system_message = """
 You are a precision research assistant for a professional UK auctioneer.
 You must:
 - Use triple-source verification only.
@@ -45,7 +45,8 @@ You must:
 1. Auction Headline (no quotation marks, correct title case, include date or date range)
 2. Conservative Auction Estimate (on a separate line)
 If you cannot verify the information, respond only: 'Unverifiable based on available evidence.'
-\"\"\"
+"""
+
 
         try:
             response = openai.ChatCompletion.create(
