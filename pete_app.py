@@ -46,8 +46,6 @@ You must:
 2. Conservative Auction Estimate (on a separate line)
 If you cannot verify the information, respond only: 'Unverifiable based on available evidence.'
 """
-
-
         try:
             response = openai.ChatCompletion.create(
                 model="gpt-4",
