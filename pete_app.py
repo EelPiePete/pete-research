@@ -22,6 +22,9 @@ api_key = st.text_input("Enter your OpenAI API Key", type="password")
 # Query input
 query = st.text_area("Enter your research or valuation query")
 
+# Optional image URL input
+image_url = st.text_input("Optional image URL (hosted image link)")
+
 # Submit button
 if st.button("Submit"):
 
@@ -30,7 +33,12 @@ if st.button("Submit"):
     elif not query:
         st.error("Please enter a query.")
     else:
-        openai.api_key = api_key
+        client = openai.OpenAI(api_key=api_key)
+
+        # Combine query and image URL if provided
+        full_query = query
+        if image_url:
+            full_query += f"\n\nAttached image link: {image_url}"
 
         system_message = """
 You are a precision research assistant for a professional UK auctioneer.
@@ -45,15 +53,15 @@ If you cannot verify the information, respond only: 'Unverifiable based on avail
 """
 
         try:
-            response = openai.ChatCompletion.create(
+            response = client.chat.completions.create(
                 model="gpt-4",
                 messages=[
-                    { "role": "system", "content": system_message },
-                    { "role": "user", "content": query }
+                    {"role": "system", "content": system_message},
+                    {"role": "user", "content": full_query}
                 ],
                 temperature=0.0
             )
-            answer = response["choices"][0]["message"]["content"]
+            answer = response.choices[0].message.content
             st.markdown("---")
             st.markdown("### ✅ Verified Response")
             st.text(answer)
