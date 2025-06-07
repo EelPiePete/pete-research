@@ -16,9 +16,6 @@ Enter your query below. This tool uses GPT-4 and follows Pete's explicit rules:
 - Auction-style formatting only
 """)
 
-- Auction-style formatting only
-\"\"\")
-
 # API Key input (hidden)
 api_key = st.text_input("Enter your OpenAI API Key", type="password")
 
@@ -35,7 +32,7 @@ if st.button("Submit"):
     else:
         openai.api_key = api_key
 
-system_message = """
+        system_message = """
 You are a precision research assistant for a professional UK auctioneer.
 You must:
 - Use triple-source verification only.
@@ -46,6 +43,7 @@ You must:
 2. Conservative Auction Estimate (on a separate line)
 If you cannot verify the information, respond only: 'Unverifiable based on available evidence.'
 """
+
         try:
             response = openai.ChatCompletion.create(
                 model="gpt-4",
